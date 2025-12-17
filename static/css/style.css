@@ -1,0 +1,17 @@
+body { font-family: sans-serif; background: #222; color: #fff; margin: 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+header { background: #333; padding: 20px; text-align: center; }
+a { color: white; text-decoration: none; }
+
+/* Grid Accueil */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+.card { background: #333; border-radius: 8px; overflow: hidden; transition: transform 0.2s; display: block; }
+.card:hover { transform: scale(1.05); background: #444; }
+.card img { width: 100%; object-fit: cover; }
+.card-content { padding: 15px; }
+
+/* Tableaux Détails */
+table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #333; }
+th, td { padding: 12px; border: 1px solid #444; text-align: left; }
+.location { text-transform: capitalize; color: #4CAF50; }
+.date-tag { display: inline-block; background: #555; padding: 2px 6px; border-radius: 4px; margin: 2px; font-size: 0.9em; }

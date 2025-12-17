@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-const BaseURL = "https://groupietrackers.herokuapp.com/api"
+const BaseURL = "https://groupietrackers.musicbouncer.com/api"
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {

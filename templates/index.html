@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Groupie Tracker - Accueil</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Groupie Tracker</h1>
+    </header>
+
+    <main class="container">
+        <div class="grid">
+            {{range .}}
+            <a href="/artist?id={{.ID}}" class="card">
+                <img src="{{.Image}}" alt="Image de {{.Name}}">
+                <div class="card-content">
+                    <h2>{{.Name}}</h2>
+                    <p>Début : {{.CreationDate}}</p>
+                    <p>Premier Album : {{.FirstAlbum}}</p>
+                </div>
+            </a>
+            {{end}}
+        </div>
+    </main>
+</body>
+</html>

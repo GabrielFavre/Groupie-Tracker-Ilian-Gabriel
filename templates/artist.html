@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{.Artist.Name}} - Détails</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <a href="/" class="back-btn">← Retour à l'accueil</a>
+        <h1>{{.Artist.Name}}</h1>
+    </header>
+
+    <main class="container detail-view">
+        
+        <section class="info-section">
+            <img src="{{.Artist.Image}}" alt="{{.Artist.Name}}">
+            <div class="meta-data">
+                <h3>Membres</h3>
+                <ul>
+                    {{range .Artist.Members}}
+                    <li>{{.}}</li>
+                    {{end}}
+                </ul>
+                <p><strong>Date de création :</strong> {{.Artist.CreationDate}}</p>
+                <p><strong>Premier Album :</strong> {{.Artist.FirstAlbum}}</p>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="dates-locations">
+            <h3>Dates et Lieux de Concerts</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ville / Pays</th>
+                        <th>Dates</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range $location, $dates := .Relation.DatesLocations}}
+                    <tr>
+                        <td class="location">{{$location}}</td>
+                        <td class="dates">
+                            {{range $dates}}
+                                <span class="date-tag">{{.}}</span>
+                            {{end}}
+                        </td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+</body>
+</html>
