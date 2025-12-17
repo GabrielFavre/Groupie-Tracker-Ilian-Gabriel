@@ -2,23 +2,30 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Groupie Tracker - Accueil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupie Tracker</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Groupie Tracker</h1>
-    </header>
+    <nav>
+        <div class="nav-content">
+            <h1>GROUPIE TRACKER</h1>
+            <input type="text" id="searchBar" placeholder="Rechercher...">
+        </div>
+    </nav>
 
-    <main class="container">
-        <div class="grid">
+    <main>
+        <div class="card-grid">
             {{range .}}
             <a href="/artist?id={{.ID}}" class="card">
-                <img src="{{.Image}}" alt="Image de {{.Name}}">
-                <div class="card-content">
+                <div class="card-image">
+                    <img src="{{.Image}}" alt="{{.Name}}">
+                </div>
+                <div class="card-info">
                     <h2>{{.Name}}</h2>
-                    <p>Début : {{.CreationDate}}</p>
-                    <p>Premier Album : {{.FirstAlbum}}</p>
+                    <p class="creation">Création : {{.CreationDate}}</p>
+                    <p class="album">1er Album : {{.FirstAlbum}}</p>
                 </div>
             </a>
             {{end}}

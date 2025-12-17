@@ -1,14 +1,13 @@
 package handlers
 
 import (
-	"groupie-tracker/api"
+	"encoding/json"
 	"groupie-tracker/models"
 	"html/template"
 	"net/http"
-	"strconv"
 )
 
-const BaseURL = "https://groupietrackers.musicbouncer.com/api"
+const BaseURL = "https://groupietrackers.herokuapp.com/api"
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
@@ -16,57 +15,27 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var artists models.ArtistList
-	err := api.FetchData(BaseURL+"/artists", &artists)
+	resp, err := http.Get(BaseURL + "/artists")
 	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer resp.Body.Close()
+
+	var artists models.ArtistList
+	if err := json.NewDecoder(resp.Body).Decode(&artists); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	tmpl, err := template.ParseFiles("templates/index.html")
 	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	tmpl.Execute(w, artists)
-}
-
-func ArtistHandler(w http.ResponseWriter, r *http.Request) {
-	idStr := r.URL.Query().Get("id")
-	id, err := strconv.Atoi(idStr)
-	if err != nil || id < 1 {
-		http.NotFound(w, r)
-		return
-	}
-
-	var artist models.Artist
-	err = api.FetchData(BaseURL+"/artists/"+idStr, &artist)
+	err = tmpl.Execute(w, artists)
 	if err != nil {
-		http.Error(w, "Error fetching artist", http.StatusInternalServerError)
-		return
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
-
-	var relation models.Relation
-	err = api.FetchData(BaseURL+"/relation/"+idStr, &relation)
-	if err != nil {
-		http.Error(w, "Error fetching relation", http.StatusInternalServerError)
-		return
-	}
-
-	data := struct {
-		Artist   models.Artist
-		Relation models.Relation
-	}{
-		Artist:   artist,
-		Relation: relation,
-	}
-
-	tmpl, err := template.ParseFiles("templates/artist.html")
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-
-	tmpl.Execute(w, data)
 }
