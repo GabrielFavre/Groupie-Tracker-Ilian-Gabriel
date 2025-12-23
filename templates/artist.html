@@ -4,55 +4,50 @@
     <meta charset="UTF-8">
     <title>{{.Artist.Name}} - Détails</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <a href="/" class="back-btn">← Retour à l'accueil</a>
-        <h1>{{.Artist.Name}}</h1>
-    </header>
+    <nav>
+        <div class="nav-content">
+            <a href="/" class="back-btn">← RETOUR</a>
+            <h1>{{.Artist.Name}}</h1>
+        </div>
+    </nav>
 
-    <main class="container detail-view">
-        
-        <section class="info-section">
+    <main class="profile-container">
+        <div class="profile-header">
             <img src="{{.Artist.Image}}" alt="{{.Artist.Name}}">
-            <div class="meta-data">
-                <h3>Membres</h3>
-                <ul>
-                    {{range .Artist.Members}}
-                    <li>{{.}}</li>
-                    {{end}}
-                </ul>
+            <div class="profile-info">
+                <h2>{{.Artist.Name}}</h2>
                 <p><strong>Date de création :</strong> {{.Artist.CreationDate}}</p>
                 <p><strong>Premier Album :</strong> {{.Artist.FirstAlbum}}</p>
+                
+                <div class="members-section">
+                    <h3>Membres</h3>
+                    <ul class="members-list">
+                        {{range .Artist.Members}}
+                        <li>{{.}}</li>
+                        {{end}}
+                    </ul>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <hr>
-
-        <section class="dates-locations">
-            <h3>Dates et Lieux de Concerts</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Ville / Pays</th>
-                        <th>Dates</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{range $location, $dates := .Relation.DatesLocations}}
-                    <tr>
-                        <td class="location">{{$location}}</td>
-                        <td class="dates">
-                            {{range $dates}}
-                                <span class="date-tag">{{.}}</span>
-                            {{end}}
-                        </td>
-                    </tr>
-                    {{end}}
-                </tbody>
-            </table>
-        </section>
-
+        <div class="concerts-section">
+            <h3>Dates & Lieux de Concerts</h3>
+            <div class="relations-grid">
+                {{range $loc, $dates := .Relation.DatesLocations}}
+                <div class="relation-card">
+                    <h4 class="location-title">{{$loc}}</h4>
+                    <div class="dates-list">
+                        {{range $dates}}
+                        <span class="date-badge">{{.}}</span>
+                        {{end}}
+                    </div>
+                </div>
+                {{end}}
+            </div>
+        </div>
     </main>
 </body>
 </html>

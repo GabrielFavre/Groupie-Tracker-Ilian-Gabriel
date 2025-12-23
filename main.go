@@ -12,6 +12,8 @@ func main() {
 
 	http.HandleFunc("/", handlers.HomeHandler)
 
+	http.HandleFunc("/artist", handlers.ArtistHandler)
+
 	fmt.Println("Server started at http://localhost:8080")
 	http.ListenAndServe(":8080", nil)
 }

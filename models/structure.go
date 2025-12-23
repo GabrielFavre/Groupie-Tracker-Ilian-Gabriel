@@ -13,3 +13,13 @@ type Artist struct {
 }
 
 type ArtistList []Artist
+
+type Relation struct {
+	ID             int                 `json:"id"`
+	DatesLocations map[string][]string `json:"datesLocations"`
+}
+
+type PageData struct {
+	Artist   Artist
+	Relation Relation
+}
