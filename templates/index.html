@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Groupie Tracker</title>
+    <title>Groupie Tracker - Nintempo</title>
     <link rel="stylesheet" href="/static/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav>
@@ -20,23 +20,34 @@
     </nav>
 
     <main>
-        <div class="section-title">ARTISTES</div>
+        <div class="header-title">Ma Collection</div>
         <div class="card-grid">
             {{range .}}
-            <a href="/artist?id={{.ID}}" class="album-card">
-                <div class="cover-image">
-                    <img src="{{.Image}}" alt="{{.Name}}">
-                    <div class="play-icon">▶</div>
-                </div>
-                <div class="album-info">
-                    <h2>{{.Name}}</h2>
-                    <p>{{.CreationDate}} • 1er Album: {{.FirstAlbum}}</p>
+            <a href="/artist?id={{.ID}}" class="ds-cartridge">
+                <div class="cartridge-plastic">
+                    <div class="arrow-insert">▼</div>
+                    
+                    <div class="cartridge-sticker">
+                        <div class="ds-header">
+                            <span class="logo-bold">Nintempo</span>
+                            <span class="logo-light">DS</span>
+                        </div>
+                        <img src="{{.Image}}" alt="{{.Name}}">
+                    </div>
+
+                    <div class="engraved-title">
+                        {{.Name}}
+                    </div>
+
+                    <div class="gold-contacts">
+                        <span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
                 </div>
             </a>
             {{end}}
         </div>
     </main>
 
-    <script src="/static/js/script.js"></script>
+<script src="/static/js/script.js?v=2"></script>
 </body>
 </html>
