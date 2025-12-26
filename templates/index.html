@@ -5,31 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Groupie Tracker</title>
     <link rel="stylesheet" href="/static/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav>
         <div class="nav-content">
             <h1>GROUPIE TRACKER</h1>
-            <input type="text" id="searchBar" placeholder="Rechercher...">
+            
+            <div class="search-container">
+                <input type="text" id="searchBar" placeholder="Rechercher...">
+                <button id="theme-toggle">🌙</button>
+            </div>
         </div>
     </nav>
 
     <main>
+        <div class="section-title">ARTISTES</div>
         <div class="card-grid">
             {{range .}}
-            <a href="/artist?id={{.ID}}" class="card">
-                <div class="card-image">
+            <a href="/artist?id={{.ID}}" class="album-card">
+                <div class="cover-image">
                     <img src="{{.Image}}" alt="{{.Name}}">
+                    <div class="play-icon">▶</div>
                 </div>
-                <div class="card-info">
+                <div class="album-info">
                     <h2>{{.Name}}</h2>
-                    <p class="creation">Création : {{.CreationDate}}</p>
-                    <p class="album">1er Album : {{.FirstAlbum}}</p>
+                    <p>{{.CreationDate}} • 1er Album: {{.FirstAlbum}}</p>
                 </div>
             </a>
             {{end}}
         </div>
     </main>
+
+    <script src="/static/js/script.js"></script>
 </body>
 </html>
