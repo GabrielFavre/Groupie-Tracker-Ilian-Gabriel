@@ -22,4 +22,9 @@ type Relation struct {
 type PageData struct {
 	Artist   Artist
 	Relation Relation
+	ApiKey   string
+}
+
+type Config struct {
+	YoutubeKey string `json:"youtube_key"`
 }

@@ -79,7 +79,7 @@
 
         function onYouTubeIframeAPIReady() {
             var artistName = document.getElementById("artist-data").getAttribute("data-name");
-            var apiKey = "AIzaSyCOw9OgpnRu_dYy8SFhkucjiWi8ALS75gc"; 
+            var apiKey = "{{.ApiKey}}"; 
 
             fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(artistName + " top songs official")}&type=video&maxResults=5&key=${apiKey}`)
                 .then(response => response.json())
