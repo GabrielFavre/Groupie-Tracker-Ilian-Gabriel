@@ -53,10 +53,9 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Lecture du fichier de config secret
 	configFile, err := os.Open("config.json")
 	if err != nil {
-		http.Error(w, "Erreur: Impossible de lire config.json", 500)
+		http.Error(w, "Erreur Config", 500)
 		return
 	}
 	defer configFile.Close()
@@ -94,6 +93,14 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+
+	cleanDatesLocations := make(map[string][]string)
+	for loc, dates := range relation.DatesLocations {
+		newLoc := strings.ReplaceAll(loc, "-", "/")
+		newLoc = strings.ReplaceAll(newLoc, "_", " ")
+		cleanDatesLocations[newLoc] = dates
+	}
+	relation.DatesLocations = cleanDatesLocations
 
 	data := models.PageData{
 		Artist:   artist,
