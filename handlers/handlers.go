@@ -93,7 +93,7 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	data := models.PageData{
 		Artist:   artist,
 		Relation: relation,
-		ApiKey:   "", // J'ai mis vide ici car config.YoutubeKey n'existe plus
+		ApiKey:   "AIzaSyAiFcXPjlPQVJX3ffjfYR9u0TWxEYjLDn0",
 	}
 
 	tmpl, err := template.ParseFiles("templates/artist.html")
