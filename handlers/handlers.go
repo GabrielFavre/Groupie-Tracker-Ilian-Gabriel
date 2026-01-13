@@ -52,8 +52,6 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// --- PARTIE SUPPRIMÉE : Chargement du config.json ---
-
 	respArtist, err := http.Get(BaseURL + "/artists/" + id)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
