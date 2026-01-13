@@ -5,7 +5,6 @@ import (
 	"groupie-tracker/models"
 	"html/template"
 	"net/http"
-	"os"
 	"strings"
 )
 
@@ -53,18 +52,7 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	configFile, err := os.Open("config.json")
-	if err != nil {
-		http.Error(w, "Erreur Config", 500)
-		return
-	}
-	defer configFile.Close()
-
-	var config models.Config
-	if err := json.NewDecoder(configFile).Decode(&config); err != nil {
-		http.Error(w, "Erreur JSON Config", 500)
-		return
-	}
+	// --- PARTIE SUPPRIMÉE : Chargement du config.json ---
 
 	respArtist, err := http.Get(BaseURL + "/artists/" + id)
 	if err != nil {
@@ -105,7 +93,7 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	data := models.PageData{
 		Artist:   artist,
 		Relation: relation,
-		ApiKey:   config.YoutubeKey,
+		ApiKey:   "", // J'ai mis vide ici car config.YoutubeKey n'existe plus
 	}
 
 	tmpl, err := template.ParseFiles("templates/artist.html")
