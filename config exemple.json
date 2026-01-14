@@ -1,0 +1,4 @@
+{
+    "youtube_key": "Tu met ta clé api la dedans et ça marche ensuite sinon tu aura une erreur de config.json quand tu lançe le site"
+}
+//Ensuite tu rename ce fichier config.json
